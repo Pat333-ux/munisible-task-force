@@ -1,0 +1,203 @@
+{
+  "system": "Beast System 3.0",
+  "module": "Anomaly Detection Rules",
+  "version": "1.0.0",
+  "classification": "SAIA-Class S",
+  "document_type": "anomaly-detection-rules",
+  "dao_insignia": "Red Ouroboros • New World Order DAO",
+
+  "owner": {
+    "name": "Pat Tarwater Jr.",
+    "title": "Chief Executive Officer",
+    "organization": "New World Order DAO",
+    "ethereum_wallet": "0cad6a0d-1462-47eb-853e-17521d57322e",
+    "federal_case_reference": "2:25-cv-00484-JPH-MJD"
+  },
+
+  "rule_engine": {
+    "evaluation_order": [
+      "integrity_rules",
+      "rights_impact_rules",
+      "wellbeing_rules",
+      "telemetry_rules",
+      "operational_rules",
+      "systemic_risk_rules"
+    ],
+    "deterministic": true,
+    "non_punitive": true,
+    "non_coercive": true
+  },
+
+  "integrity_rules": [
+    {
+      "id": "INT-001",
+      "description": "Detects integrity hash mismatches in any registry artifact.",
+      "condition": {
+        "field": "integrity_hash_valid",
+        "operator": "equals",
+        "value": false
+      },
+      "severity": "critical",
+      "on_trigger": "escalate_integrity_chain_review"
+    },
+    {
+      "id": "INT-002",
+      "description": "Detects lineage discontinuity in DAO-anchored artifacts.",
+      "condition": {
+        "field": "lineage_continuous",
+        "operator": "equals",
+        "value": false
+      },
+      "severity": "high",
+      "on_trigger": "escalate_lineage_break"
+    }
+  ],
+
+  "rights_impact_rules": [
+    {
+      "id": "RI-001",
+      "description": "Flags any event containing a rights-impact indicator.",
+      "condition": {
+        "field": "rights_impact_indicator",
+        "operator": "equals",
+        "value": true
+      },
+      "severity": "critical",
+      "on_trigger": "route_to_rights_impact_stream"
+    },
+    {
+      "id": "RI-002",
+      "description": "Detects coercive or discriminatory municipal behavior.",
+      "condition": {
+        "field": "coercion_or_discrimination_detected",
+        "operator": "equals",
+        "value": true
+      },
+      "severity": "critical",
+      "on_trigger": "escalate_to_oversight"
+    }
+  ],
+
+  "wellbeing_rules": [
+    {
+      "id": "WB-001",
+      "description": "Flags emotional distress indicators.",
+      "condition": {
+        "field": "emotional_distress",
+        "operator": "greater_than",
+        "value": 0
+      },
+      "severity": "high",
+      "on_trigger": "route_to_wellbeing_stream"
+    },
+    {
+      "id": "WB-002",
+      "description": "Flags physical safety concerns.",
+      "condition": {
+        "field": "physical_safety_risk",
+        "operator": "greater_than",
+        "value": 0
+      },
+      "severity": "critical",
+      "on_trigger": "escalate_wellbeing_risk"
+    }
+  ],
+
+  "telemetry_rules": [
+    {
+      "id": "TEL-001",
+      "description": "Detects telemetry anomalies above threshold.",
+      "condition": {
+        "field": "anomaly_level",
+        "operator": "in",
+        "value": ["high", "critical"]
+      },
+      "severity": "high",
+      "on_trigger": "route_to_telemetry_stream"
+    },
+    {
+      "id": "TEL-002",
+      "description": "Detects systemic risk signatures.",
+      "condition": {
+        "field": "systemic_risk_signature",
+        "operator": "equals",
+        "value": true
+      },
+      "severity": "critical",
+      "on_trigger": "escalate_systemic_risk"
+    }
+  ],
+
+  "operational_rules": [
+    {
+      "id": "OP-001",
+      "description": "Detects repeated documentation gaps.",
+      "condition": {
+        "field": "documentation_gap_count",
+        "operator": "greater_than",
+        "value": 3
+      },
+      "severity": "medium",
+      "on_trigger": "flag_operational_issue"
+    },
+    {
+      "id": "OP-002",
+      "description": "Detects workflow deviations.",
+      "condition": {
+        "field": "workflow_deviation",
+        "operator": "equals",
+        "value": true
+      },
+      "severity": "medium",
+      "on_trigger": "log_workflow_anomaly"
+    }
+  ],
+
+  "systemic_risk_rules": [
+    {
+      "id": "SR-001",
+      "description": "Detects patterns matching known systemic failures.",
+      "condition": {
+        "field": "pattern_match_systemic",
+        "operator": "equals",
+        "value": true
+      },
+      "severity": "critical",
+      "on_trigger": "escalate_systemic_failure"
+    },
+    {
+      "id": "SR-002",
+      "description": "Detects repeated municipal service failures above threshold.",
+      "condition": {
+        "field": "service_failure_count",
+        "operator": "greater_than",
+        "value": 5
+      },
+      "severity": "high",
+      "on_trigger": "notify_oversight"
+    }
+  ],
+
+  "auto_escalation_triggers": [
+    "rights_impact_indicator == true",
+    "wellbeing_risk_indicator == true",
+    "anomaly_level in ['high', 'critical']",
+    "integrity_hash_valid == false",
+    "lineage_continuous == false",
+    "systemic_risk_signature == true"
+  ],
+
+  "amendment_protocol": {
+    "requires_executive_approval": true,
+    "requires_dao_anchoring": true,
+    "requires_integrity_chain_update": true,
+    "requires_manifest_update": true
+  },
+
+  "metadata": {
+    "created_at": "2026-05-18",
+    "created_by": "Pat Tarwater Jr.",
+    "integrity_class": "SAIA-Class S",
+    "hashing_standard": "Beast System 3.0 Integrity Chain"
+  }
+}
