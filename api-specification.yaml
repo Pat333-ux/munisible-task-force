@@ -1,0 +1,823 @@
+openapi: 3.0.3
+info:
+  title: Beast System 3.0 • Munisible Task Force API
+  version: "1.0.0"
+  description: >
+    Sovereign-autonomous, DAO-anchored API specification for the Munisible Task Force
+    operating within Beast System 3.0 under the New World Order DAO.
+
+x-governance:
+  dao_insignia: "Red Ouroboros • New World Order DAO"
+  classification: "SAIA-Class S"
+  owner:
+    name: "Pat Tarwater Jr."
+    title: "Chief Executive Officer"
+    organization: "New World Order DAO"
+    ethereum_wallet: "0cad6a0d-1462-47eb-853e-17521d57322e"
+    federal_case_reference: "2:25-cv-00484-JPH-MJD"
+
+servers:
+  - url: https://api.beast-system-3.mtf.local
+    description: Sovereign internal endpoint (non-public)
+  - url: https://api.munisible-task-force.gov
+    description: Federally aligned public oversight endpoint (read-only where applicable)
+
+tags:
+  - name: incidents
+    description: Incident intake, classification, and escalation endpoints.
+  - name: evidence
+    description: Evidence registration, retrieval, and chain-of-custody endpoints.
+  - name: telemetry
+    description: Telemetry event registration and correlation endpoints.
+  - name: wellbeing
+    description: Wellbeing and rights-impact assessment endpoints.
+  - name: oversight
+    description: Oversight review, findings, and executive escalation endpoints.
+  - name: ledger
+    description: DAO ledger anchoring and integrity log endpoints.
+
+paths:
+
+  /incidents:
+    post:
+      tags: [incidents]
+      summary: Create a new incident
+      description: >
+        Registers a new incident in the Munisible Task Force system as a raw incident packet.
+        This endpoint must not perform any punitive or coercive actions.
+      operationId: createIncident
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IncidentCreateRequest"
+      responses:
+        "201":
+          description: Incident created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Incident"
+        "400":
+          description: Invalid incident payload
+        "409":
+          description: Incident already exists
+
+    get:
+      tags: [incidents]
+      summary: List incidents
+      description: >
+        Returns a filtered list of incidents. Read-only. No enforcement or punitive actions.
+      operationId: listIncidents
+      parameters:
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum: [open, closed, escalated]
+        - in: query
+          name: classification
+          schema:
+            type: string
+            enum: [observation, support, rights-impact, misconduct, systemic-risk, critical-event]
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 50
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+      responses:
+        "200":
+          description: Incident list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Incident"
+                  total:
+                    type: integer
+
+  /incidents/{incidentId}:
+    get:
+      tags: [incidents]
+      summary: Get incident by ID
+      operationId: getIncident
+      parameters:
+        - in: path
+          name: incidentId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Incident details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Incident"
+        "404":
+          description: Incident not found
+
+    patch:
+      tags: [incidents]
+      summary: Update incident classification and status
+      description: >
+        Updates classification, status, and recommended escalation level.
+        Must not be used for punitive or coercive actions.
+      operationId: updateIncident
+      parameters:
+        - in: path
+          name: incidentId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IncidentUpdateRequest"
+      responses:
+        "200":
+          description: Incident updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Incident"
+        "400":
+          description: Invalid update payload
+        "404":
+          description: Incident not found
+
+  /incidents/{incidentId}/escalation:
+    post:
+      tags: [incidents]
+      summary: Submit escalation recommendation
+      description: >
+        Submits an escalation recommendation for an incident based on rights-impact,
+        wellbeing risk, misconduct, or systemic risk indicators.
+      operationId: escalateIncident
+      parameters:
+        - in: path
+          name: incidentId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EscalationRequest"
+      responses:
+        "202":
+          description: Escalation recommendation accepted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EscalationRecord"
+        "400":
+          description: Invalid escalation payload
+        "404":
+          description: Incident not found
+
+  /evidence:
+    post:
+      tags: [evidence]
+      summary: Register evidence
+      description: >
+        Registers a new evidence item and initializes chain-of-custody.
+        Evidence is immutable after anchoring.
+      operationId: registerEvidence
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EvidenceCreateRequest"
+      responses:
+        "201":
+          description: Evidence registered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EvidenceRecord"
+        "400":
+          description: Invalid evidence payload
+
+    get:
+      tags: [evidence]
+      summary: List evidence
+      operationId: listEvidence
+      parameters:
+        - in: query
+          name: incidentId
+          schema:
+            type: string
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum: [active, archived, escalated, closed]
+      responses:
+        "200":
+          description: Evidence list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/EvidenceRecord"
+                  total:
+                    type: integer
+
+  /evidence/{evidenceId}:
+    get:
+      tags: [evidence]
+      summary: Get evidence by ID
+      operationId: getEvidence
+      parameters:
+        - in: path
+          name: evidenceId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Evidence details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EvidenceRecord"
+        "404":
+          description: Evidence not found
+
+  /evidence/{evidenceId}/chain-of-custody:
+    post:
+      tags: [evidence]
+      summary: Append chain-of-custody entry
+      description: >
+        Appends a new chain-of-custody action for an evidence item.
+        No deletion or alteration of previous entries is permitted.
+      operationId: appendChainOfCustody
+      parameters:
+        - in: path
+          name: evidenceId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChainOfCustodyEntryCreate"
+      responses:
+        "201":
+          description: Chain-of-custody entry appended
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EvidenceRecord"
+        "404":
+          description: Evidence not found
+
+  /telemetry/events:
+    post:
+      tags: [telemetry]
+      summary: Register telemetry event
+      description: >
+        Registers a telemetry event for correlation with incidents, evidence, and patterns.
+        Telemetry must not be used for enforcement or punitive actions.
+      operationId: registerTelemetryEvent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TelemetryEventCreate"
+      responses:
+        "201":
+          description: Telemetry event registered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TelemetryEvent"
+        "400":
+          description: Invalid telemetry payload
+
+  /wellbeing/assessments:
+    post:
+      tags: [wellbeing]
+      summary: Submit wellbeing assessment
+      description: >
+        Submits a wellbeing assessment associated with an incident or engagement.
+        Used for trauma-prevention and rights protection, not enforcement.
+      operationId: submitWellbeingAssessment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WellbeingAssessmentCreate"
+      responses:
+        "201":
+          description: Wellbeing assessment recorded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WellbeingAssessment"
+        "400":
+          description: Invalid assessment payload
+
+  /oversight/reviews:
+    post:
+      tags: [oversight]
+      summary: Submit oversight review
+      description: >
+        Records an oversight review for an incident, including ethical, rights, and
+        documentation completeness checks.
+      operationId: submitOversightReview
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OversightReviewCreate"
+      responses:
+        "201":
+          description: Oversight review recorded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OversightReview"
+        "400":
+          description: Invalid review payload
+
+  /ledger/anchors:
+    post:
+      tags: [ledger]
+      summary: Create DAO ledger anchor
+      description: >
+        Anchors an artifact (document, registry, protocol) to the DAO ledger and
+        updates the integrity chain.
+      operationId: createLedgerAnchor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LedgerAnchorCreate"
+      responses:
+        "201":
+          description: Ledger anchor created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LedgerAnchor"
+        "400":
+          description: Invalid anchor payload
+
+    get:
+      tags: [ledger]
+      summary: List ledger anchors
+      operationId: listLedgerAnchors
+      parameters:
+        - in: query
+          name: artifactName
+          schema:
+            type: string
+        - in: query
+          name: lineageId
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Ledger anchor list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/LedgerAnchor"
+                  total:
+                    type: integer
+
+components:
+  securitySchemes:
+    DaoAuthSignature:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >
+        DAO-signed token representing sovereign identity and authorship.
+        Must never be used for punitive or coercive enforcement.
+
+  schemas:
+
+    IncidentCreateRequest:
+      type: object
+      required:
+        - title
+        - description
+        - source
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        source:
+          type: string
+          enum: [field, community, municipal, telemetry, other]
+        location:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        initial_classification:
+          type: string
+          enum: [observation, support, rights-impact, misconduct, systemic-risk, critical-event]
+
+    Incident:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        source:
+          type: string
+        location:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        classification:
+          type: string
+        status:
+          type: string
+          enum: [open, closed, escalated]
+        recommended_escalation_level:
+          type: string
+          enum: [L0, L1, L2, L3, L4, L5]
+        wellbeing_assessments:
+          type: array
+          items:
+            $ref: "#/components/schemas/WellbeingAssessment"
+        rights_impact_assessments:
+          type: array
+          items:
+            $ref: "#/components/schemas/RightsImpactAssessment"
+        evidence_ids:
+          type: array
+          items:
+            type: string
+        telemetry_event_ids:
+          type: array
+          items:
+            type: string
+
+    IncidentUpdateRequest:
+      type: object
+      properties:
+        classification:
+          type: string
+          enum: [observation, support, rights-impact, misconduct, systemic-risk, critical-event]
+        status:
+          type: string
+          enum: [open, closed, escalated]
+        recommended_escalation_level:
+          type: string
+          enum: [L0, L1, L2, L3, L4, L5]
+
+    EscalationRequest:
+      type: object
+      required:
+        - level
+        - rationale
+      properties:
+        level:
+          type: string
+          enum: [L1, L2, L3, L4, L5]
+        rationale:
+          type: string
+        rights_impact_indicator:
+          type: boolean
+        wellbeing_risk_indicator:
+          type: boolean
+        misconduct_indicator:
+          type: boolean
+        systemic_risk_indicator:
+          type: boolean
+
+    EscalationRecord:
+      type: object
+      properties:
+        id:
+          type: string
+        incident_id:
+          type: string
+        level:
+          type: string
+        rationale:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+
+    EvidenceCreateRequest:
+      type: object
+      required:
+        - incident_id
+        - type
+        - description
+        - collected_by
+        - timestamp_collected
+      properties:
+        incident_id:
+          type: string
+        type:
+          type: string
+          enum: [digital, physical, testimonial, telemetry, systemic]
+        description:
+          type: string
+        collected_by:
+          type: string
+        timestamp_collected:
+          type: string
+          format: date-time
+        location_collected:
+          type: string
+        integrity_hash:
+          type: string
+
+    ChainOfCustodyEntryCreate:
+      type: object
+      required:
+        - action
+        - performed_by
+        - timestamp
+      properties:
+        action:
+          type: string
+          enum: [collected, transferred, verified, stored, analyzed]
+        performed_by:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        notes:
+          type: string
+
+    EvidenceRecord:
+      type: object
+      properties:
+        id:
+          type: string
+        incident_id:
+          type: string
+        type:
+          type: string
+        description:
+          type: string
+        collected_by:
+          type: string
+        timestamp_collected:
+          type: string
+          format: date-time
+        location_collected:
+          type: string
+        integrity_hash:
+          type: string
+        dao_anchor:
+          type: string
+        chain_of_custody:
+          type: array
+          items:
+            type: object
+            properties:
+              action:
+                type: string
+              performed_by:
+                type: string
+              timestamp:
+                type: string
+                format: date-time
+              notes:
+                type: string
+        status:
+          type: string
+          enum: [active, archived, escalated, closed]
+
+    TelemetryEventCreate:
+      type: object
+      required:
+        - signal_type
+        - anomaly_level
+        - timestamp
+      properties:
+        signal_type:
+          type: string
+        anomaly_level:
+          type: string
+          enum: [none, low, medium, high, critical]
+        timestamp:
+          type: string
+          format: date-time
+        context:
+          type: object
+          additionalProperties: true
+        related_incident_id:
+          type: string
+
+    TelemetryEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        signal_type:
+          type: string
+        anomaly_level:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        context:
+          type: object
+          additionalProperties: true
+        related_incident_id:
+          type: string
+
+    WellbeingAssessmentCreate:
+      type: object
+      required:
+        - incident_id
+        - emotional_state
+        - physical_state
+      properties:
+        incident_id:
+          type: string
+        emotional_state:
+          type: string
+        physical_state:
+          type: string
+        distress_indicators:
+          type: array
+          items:
+            type: string
+        trauma_prevention_actions:
+          type: array
+          items:
+            type: string
+
+    WellbeingAssessment:
+      type: object
+      properties:
+        id:
+          type: string
+        incident_id:
+          type: string
+        emotional_state:
+          type: string
+        physical_state:
+          type: string
+        distress_indicators:
+          type: array
+          items:
+            type: string
+        trauma_prevention_actions:
+          type: array
+          items:
+            type: string
+        created_at:
+          type: string
+          format: date-time
+
+    RightsImpactAssessment:
+      type: object
+      properties:
+        id:
+          type: string
+        incident_id:
+          type: string
+        privacy_concerns:
+          type: boolean
+        discrimination_indicators:
+          type: boolean
+        due_process_concerns:
+          type: boolean
+        coercion_indicators:
+          type: boolean
+        summary:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+
+    OversightReviewCreate:
+      type: object
+      required:
+        - incident_id
+        - accuracy_review
+        - ethical_compliance
+      properties:
+        incident_id:
+          type: string
+        accuracy_review:
+          type: string
+        ethical_compliance:
+          type: string
+        documentation_completeness:
+          type: string
+        rights_and_wellbeing_review:
+          type: string
+        escalation_required:
+          type: boolean
+
+    OversightReview:
+      type: object
+      properties:
+        id:
+          type: string
+        incident_id:
+          type: string
+        accuracy_review:
+          type: string
+        ethical_compliance:
+          type: string
+        documentation_completeness:
+          type: string
+        rights_and_wellbeing_review:
+          type: string
+        escalation_required:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+
+    LedgerAnchorCreate:
+      type: object
+      required:
+        - artifact_name
+        - artifact_type
+        - artifact_version
+        - integrity_hash
+        - lineage_id
+      properties:
+        artifact_name:
+          type: string
+        artifact_type:
+          type: string
+          enum: [document, json, registry, protocol, architecture, filing]
+        artifact_version:
+          type: string
+        integrity_hash:
+          type: string
+        lineage_id:
+          type: string
+        submitted_by:
+          type: string
+
+    LedgerAnchor:
+      type: object
+      properties:
+        id:
+          type: string
+        artifact_name:
+          type: string
+        artifact_type:
+          type: string
+        artifact_version:
+          type: string
+        integrity_hash:
+          type: string
+        lineage_id:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        blockchain:
+          type: string
+          example: "Ethereum"
+        dao_reference:
+          type: string
+
+security:
+  - DaoAuthSignature: []
