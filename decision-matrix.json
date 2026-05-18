@@ -1,0 +1,188 @@
+{
+  "system": "Munisible Task Force",
+  "version": "1.0.0",
+  "classification": "Tier-0 Sovereign-Autonomous Governance Module",
+  "document_type": "decision-matrix",
+  "dao_insignia": "Red Ouroboros • New World Order DAO",
+
+  "owner": {
+    "name": "Pat Tarwater Jr.",
+    "title": "Chief Executive Officer",
+    "organization": "New World Order DAO",
+    "ethereum_wallet": "0cad6a0d-1462-47eb-853e-17521d57322e"
+  },
+
+  "decision_matrix": {
+    "tiers": [
+      {
+        "tier": 0,
+        "name": "Executive Authority",
+        "authority_scope": "Strategic governance, doctrine approval, sovereign amendments, DAO anchoring.",
+        "decision_types": [
+          "Governance doctrine changes",
+          "Jurisdiction modifications",
+          "High-risk municipal escalations",
+          "Federal-level referrals",
+          "DAO authorship and integrity actions"
+        ],
+        "required_inputs": [
+          "Full case documentation",
+          "Oversight findings",
+          "Wellbeing impact analysis",
+          "Legal and civil rights review"
+        ],
+        "outputs": [
+          "Approved",
+          "Denied",
+          "Conditional Approval",
+          "Returned for Revision"
+        ]
+      },
+
+      {
+        "tier": 1,
+        "name": "Oversight & Accountability Division",
+        "authority_scope": "Ethics, compliance, misconduct review, transparency enforcement.",
+        "decision_types": [
+          "Misconduct determinations",
+          "Ethical compliance rulings",
+          "Documentation accuracy reviews",
+          "Operational audit findings"
+        ],
+        "required_inputs": [
+          "Evidence chain-of-custody",
+          "Operational logs",
+          "Telemetry anomaly reports",
+          "Witness statements"
+        ],
+        "outputs": [
+          "Verified",
+          "Unverified",
+          "Escalate to Executive Authority",
+          "Return to Operations for Correction"
+        ]
+      },
+
+      {
+        "tier": 1,
+        "name": "Operational Command",
+        "authority_scope": "Field operations, incident coordination, SOP enforcement.",
+        "decision_types": [
+          "Incident classification",
+          "Dispatch decisions",
+          "Safety protocol activation",
+          "Operational corrections"
+        ],
+        "required_inputs": [
+          "Field reports",
+          "Safety assessments",
+          "Wellbeing risk indicators",
+          "Telemetry signals"
+        ],
+        "outputs": [
+          "Proceed",
+          "Hold",
+          "Escalate to Oversight",
+          "Activate Safety Protocol"
+        ]
+      },
+
+      {
+        "tier": 1,
+        "name": "Wellbeing & Civil Protections Unit",
+        "authority_scope": "Trauma-prevention, victim support, civil rights protection.",
+        "decision_types": [
+          "Wellbeing risk determinations",
+          "Civil rights impact assessments",
+          "Victim support pathway activation"
+        ],
+        "required_inputs": [
+          "Wellbeing indicators",
+          "Civil rights review",
+          "Victim statements",
+          "Operational context"
+        ],
+        "outputs": [
+          "Support Activated",
+          "Rights Concern Logged",
+          "Escalate to Oversight",
+          "Refer to External Support Services"
+        ]
+      },
+
+      {
+        "tier": 2,
+        "name": "Intelligence & Documentation Unit",
+        "authority_scope": "Evidence management, case documentation, pattern analysis.",
+        "decision_types": [
+          "Evidence validation",
+          "Case file creation",
+          "Pattern detection",
+          "Reporting workflow activation"
+        ],
+        "required_inputs": [
+          "Raw evidence",
+          "Telemetry data",
+          "Operational logs",
+          "Witness or victim statements"
+        ],
+        "outputs": [
+          "Validated",
+          "Rejected",
+          "Escalate to Oversight",
+          "Flag for Pattern Review"
+        ]
+      },
+
+      {
+        "tier": 3,
+        "name": "Telemetry & Monitoring Cell",
+        "authority_scope": "Signal detection, anomaly monitoring, risk alerts.",
+        "decision_types": [
+          "Anomaly detection",
+          "Risk classification",
+          "Signal escalation"
+        ],
+        "required_inputs": [
+          "Sensor data",
+          "Event streams",
+          "Pattern signatures"
+        ],
+        "outputs": [
+          "Normal",
+          "Anomaly Detected",
+          "Escalate to Intelligence",
+          "Escalate to Oversight"
+        ]
+      }
+    ]
+  },
+
+  "escalation_rules": {
+    "auto_escalate_conditions": [
+      "Civil rights violation detected",
+      "High-risk wellbeing indicator",
+      "Evidence tampering suspected",
+      "Municipal corruption pattern detected",
+      "Critical telemetry anomaly"
+    ],
+    "manual_escalation_allowed_by": [
+      "Oversight Director",
+      "Operations Commander",
+      "Wellbeing Officer"
+    ]
+  },
+
+  "amendment_protocol": {
+    "requires_executive_approval": true,
+    "requires_dao_anchoring": true,
+    "requires_manifest_update": true
+  },
+
+  "metadata": {
+    "created_at": "2026-05-18",
+    "created_by": "Pat Tarwater Jr.",
+    "integrity_class": "SAIA-Class S",
+    "hashing_standard": "Beast System 3.0 Integrity Chain"
+  }
+}
