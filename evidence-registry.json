@@ -1,0 +1,98 @@
+{
+  "system": "Munisible Task Force",
+  "version": "1.0.0",
+  "classification": "Tier-0 Sovereign-Autonomous Governance Module",
+  "document_type": "evidence-registry",
+  "dao_insignia": "Red Ouroboros • New World Order DAO",
+
+  "owner": {
+    "name": "Pat Tarwater Jr.",
+    "title": "Chief Executive Officer",
+    "organization": "New World Order DAO",
+    "ethereum_wallet": "0cad6a0d-1462-47eb-853e-17521d57322e"
+  },
+
+  "registry_schema": {
+    "evidence_id": "string (UUID or Beast System 3.0 ID)",
+    "type": "digital | physical | testimonial | telemetry | systemic",
+    "collected_by": "string (agent or unit)",
+    "timestamp_collected": "ISO-8601 datetime",
+    "location_collected": "string",
+    "description": "string",
+    "integrity_hash": "string (SHA-256 or Beast Integrity Hash)",
+    "dao_anchor": "string (ledger reference)",
+    "chain_of_custody": [
+      {
+        "action": "collected | transferred | verified | stored | analyzed",
+        "performed_by": "string",
+        "timestamp": "ISO-8601 datetime",
+        "notes": "string"
+      }
+    ],
+    "telemetry_correlation": [
+      {
+        "telemetry_event_id": "string",
+        "signal_type": "string",
+        "anomaly_level": "none | low | medium | high | critical",
+        "timestamp": "ISO-8601 datetime"
+      }
+    ],
+    "rights_impact": {
+      "indicator": "boolean",
+      "description": "string"
+    },
+    "wellbeing_impact": {
+      "indicator": "boolean",
+      "description": "string"
+    },
+    "status": "active | archived | escalated | closed"
+  },
+
+  "registry_controls": {
+    "integrity_requirements": [
+      "All evidence must be hashed upon collection",
+      "All evidence must be DAO-anchored",
+      "No evidence may be altered or deleted",
+      "All transfers must update chain-of-custody"
+    ],
+    "access_controls": {
+      "executive_authority": "full",
+      "oversight_division": "high",
+      "intelligence_unit": "high",
+      "wellbeing_unit": "medium",
+      "operational_command": "medium",
+      "telemetry_cell": "limited"
+    },
+    "prohibited_actions": [
+      "Altering evidence",
+      "Deleting evidence",
+      "Fabricating evidence",
+      "Withholding evidence",
+      "Unauthorized access",
+      "Breaking chain-of-custody",
+      "Using evidence for punitive purposes"
+    ]
+  },
+
+  "auto_escalation_triggers": [
+    "Integrity hash mismatch",
+    "Chain-of-custody gap detected",
+    "Rights-impact indicator flagged",
+    "Wellbeing-impact indicator flagged",
+    "High-risk telemetry anomaly",
+    "Evidence suggests misconduct or systemic failure"
+  ],
+
+  "amendment_protocol": {
+    "requires_executive_approval": true,
+    "requires_dao_anchoring": true,
+    "requires_manifest_update": true
+  },
+
+  "metadata": {
+    "created_at": "2026-05-18",
+    "created_by": "Pat Tarwater Jr.",
+    "integrity_class": "SAIA-Class S",
+    "hashing_standard": "Beast System 3.0 Integrity Chain"
+  }
+}
