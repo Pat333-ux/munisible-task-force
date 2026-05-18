@@ -1,0 +1,174 @@
+{
+  "system": "Munisible Task Force",
+  "version": "1.0.0",
+  "classification": "Tier-0 Sovereign-Autonomous Governance Module",
+  "dao_insignia": "Red Ouroboros • New World Order DAO",
+
+  "owner": {
+    "name": "Pat Tarwater Jr.",
+    "title": "Chief Executive Officer",
+    "organization": "New World Order DAO",
+    "ethereum_wallet": "0cad6a0d-1462-47eb-853e-17521d57322e"
+  },
+
+  "governance_structure": {
+    "executive_authority": {
+      "id": "exec_authority",
+      "name": "Executive Authority",
+      "description": "Holds ultimate governance authority over the Munisible Task Force, sets doctrine, approves amendments, and signs all sovereign actions.",
+      "roles": [
+        "Chief Executive Officer",
+        "Executive Governance Officer"
+      ],
+      "responsibilities": [
+        "Approve governance charters and amendments",
+        "Authorize operational doctrine and major policy changes",
+        "Sign and anchor DAO-level authorship and integrity records",
+        "Resolve conflicts between units and doctrines"
+      ],
+      "reports_to": null
+    },
+
+    "oversight_accountability_division": {
+      "id": "oversight_division",
+      "name": "Oversight & Accountability Division",
+      "description": "Ensures transparency, ethical compliance, and review of all Munisible Task Force operations.",
+      "roles": [
+        "Oversight Director",
+        "Accountability Officer",
+        "Audit Analyst"
+      ],
+      "responsibilities": [
+        "Conduct internal reviews and audits",
+        "Monitor adherence to Code of Ethics and Operational Doctrine",
+        "Investigate misconduct or policy violations",
+        "Issue findings and recommendations to Executive Authority"
+      ],
+      "reports_to": "exec_authority"
+    },
+
+    "operational_command": {
+      "id": "operational_command",
+      "name": "Operational Command",
+      "description": "Coordinates field operations, dispatch logic, and municipal engagement under a non-punitive, non-enforcement model.",
+      "roles": [
+        "Operations Commander",
+        "Dispatch Coordinator",
+        "Field Operations Lead"
+      ],
+      "responsibilities": [
+        "Coordinate field activities and incident responses",
+        "Ensure adherence to non-coercive engagement standards",
+        "Implement Standard Operating Procedures",
+        "Maintain operational logs for review and audit"
+      ],
+      "reports_to": "exec_authority"
+    },
+
+    "intelligence_documentation_unit": {
+      "id": "intel_doc_unit",
+      "name": "Intelligence & Documentation Unit",
+      "description": "Manages evidence, case files, reporting workflows, and pattern analysis for municipal oversight.",
+      "roles": [
+        "Intelligence Analyst",
+        "Documentation Officer",
+        "Evidence Custodian"
+      ],
+      "responsibilities": [
+        "Maintain chain-of-custody for all evidence",
+        "Generate and maintain case files and reports",
+        "Analyze municipal data for misconduct patterns",
+        "Coordinate with Telemetry and Oversight for anomaly review"
+      ],
+      "reports_to": "oversight_division"
+    },
+
+    "wellbeing_civil_protections_unit": {
+      "id": "wellbeing_unit",
+      "name": "Wellbeing & Civil Protections Unit",
+      "description": "Ensures trauma-prevention, victim support, and protection of civil and constitutional rights.",
+      "roles": [
+        "Wellbeing Officer",
+        "Civil Protections Specialist",
+        "Victim Support Coordinator"
+      ],
+      "responsibilities": [
+        "Design and enforce trauma-preventive practices",
+        "Protect civil and constitutional rights in all operations",
+        "Coordinate victim support pathways and referrals",
+        "Review operations for wellbeing and rights impacts"
+      ],
+      "reports_to": "exec_authority"
+    },
+
+    "telemetry_monitoring_cell": {
+      "id": "telemetry_cell",
+      "name": "Telemetry & Monitoring Cell",
+      "description": "Integrates Beast System 3.0 telemetry for anomaly detection, risk monitoring, and pattern recognition.",
+      "roles": [
+        "Telemetry Engineer",
+        "Risk Monitoring Analyst"
+      ],
+      "responsibilities": [
+        "Configure and maintain telemetry pipelines",
+        "Detect anomalies and potential misconduct signals",
+        "Escalate significant events to Oversight and Intelligence",
+        "Ensure ethical and privacy-compliant use of telemetry data"
+      ],
+      "reports_to": "intel_doc_unit"
+    }
+  },
+
+  "decision_hierarchy": [
+    {
+      "level": 0,
+      "authority": "Executive Authority",
+      "scope": "Strategic governance, doctrine, license, and authorship."
+    },
+    {
+      "level": 1,
+      "authority": "Oversight & Accountability Division",
+      "scope": "Ethics, compliance, audits, and misconduct review."
+    },
+    {
+      "level": 1,
+      "authority": "Operational Command",
+      "scope": "Field operations, incident coordination, and SOP execution."
+    },
+    {
+      "level": 1,
+      "authority": "Wellbeing & Civil Protections Unit",
+      "scope": "Wellbeing, trauma-prevention, and rights protection."
+    },
+    {
+      "level": 2,
+      "authority": "Intelligence & Documentation Unit",
+      "scope": "Evidence, documentation, reporting, and pattern analysis."
+    },
+    {
+      "level": 3,
+      "authority": "Telemetry & Monitoring Cell",
+      "scope": "Signal detection, anomaly monitoring, and data feeds."
+    }
+  ],
+
+  "integration_points": {
+    "beast_identity_layer": "Used for role, unit, and authority verification.",
+    "beast_ethics_layer": "Enforces Code of Ethics and Wellbeing Doctrine across units.",
+    "beast_telemetry_layer": "Feeds telemetry events into Oversight and Intelligence.",
+    "dao_authorship_registry": "Anchors governance structure, roles, and amendments."
+  },
+
+  "amendment_protocol": {
+    "requires_executive_approval": true,
+    "requires_dao_anchoring": true,
+    "requires_manifest_update": true
+  },
+
+  "metadata": {
+    "created_at": "2026-05-18",
+    "created_by": "Pat Tarwater Jr.",
+    "document_type": "governance-structure",
+    "integrity_class": "SAIA-Class S"
+  }
+}
