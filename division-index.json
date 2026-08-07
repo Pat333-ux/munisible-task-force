@@ -1,0 +1,121 @@
+{
+  "module": "munisible_task_force",
+  "version": "3.0.0",
+  "type": "governance_registry",
+  "total_divisions": 8,
+  "divisions": [
+    {
+      "id": "division_civic_integrity",
+      "name": "Civic Integrity Division",
+      "description": "Governs procedural fairness, transparency, and accountability in municipal decision-making. Ensures all governance actions align with constitutional principles and due process.",
+      "path": "/divisions/civic-integrity-division.md",
+      "dependencies": [
+        "identity_kernel",
+        "ethics_kernel"
+      ],
+      "artifact_hash": "sha256:a7f3d9c2e1b4f8a9d5c7b3e2a1f4d8c6e9b2a5f7d1c3e8a4b6f9d2e5a7c1"
+    },
+    {
+      "id": "division_fiscal_stewardship",
+      "name": "Fiscal Stewardship Division",
+      "description": "Oversees municipal budget allocation, spending restrictions, and financial transparency. Ensures funds are used for their intended purposes and public benefit.",
+      "path": "/divisions/fiscal-stewardship-division.md",
+      "dependencies": [
+        "ethics_kernel",
+        "telemetry_kernel"
+      ],
+      "artifact_hash": "sha256:b8e4a2d1f9c3e7b5a1d6f2c8e4a9b3d7f1c5e8a2b6d9f3a7c1e4b8d2f5a9"
+    },
+    {
+      "id": "division_transparency_audit",
+      "name": "Transparency & Audit Division",
+      "description": "Maintains records of all municipal governance actions, voting patterns, and executive decisions. Enables public audit trails and forensic investigation.",
+      "path": "/divisions/transparency-audit-division.md",
+      "dependencies": [
+        "telemetry_kernel",
+        "identity_kernel"
+      ],
+      "artifact_hash": "sha256:c9f5b3e2a1d8c7f4e6b2d9a3c1f5e8a2d7b4c9f1e3a6d2b5c8f1a4e7d9b2c"
+    },
+    {
+      "id": "division_legal_compliance",
+      "name": "Legal Compliance Division",
+      "description": "Enforces adherence to federal, state, and local law. Blocks governance actions that violate statutes, ordinances, or constitutional constraints.",
+      "path": "/divisions/legal-compliance-division.md",
+      "dependencies": [
+        "identity_kernel",
+        "ethics_kernel"
+      ],
+      "artifact_hash": "sha256:d1a6c4f3e2b9d7a5c8e1f4b2d6a9c3e7f1b4d8a2c5f9e3a6b1d4c7f2a5e8b"
+    },
+    {
+      "id": "division_executive_oversight",
+      "name": "Executive Oversight Division",
+      "description": "Monitors municipal executive actions, enforcement authority, and administrative power. Ensures checks and balances on executive discretion.",
+      "path": "/divisions/executive-oversight-division.md",
+      "dependencies": [
+        "identity_kernel",
+        "telemetry_kernel"
+      ],
+      "artifact_hash": "sha256:e2b7d5f4a3c1e8b6d9a2c7f1e4a8b3d6f2c5a9e1b4d7c2f8a3b6e1d4c8f5a"
+    },
+    {
+      "id": "division_public_safety",
+      "name": "Public Safety Division",
+      "description": "Ensures municipal governance protects public welfare, minimizes harm, and maintains civil order. Governs emergency response and community safety protocols.",
+      "path": "/divisions/public-safety-division.md",
+      "dependencies": [
+        "ethics_kernel",
+        "identity_kernel"
+      ],
+      "artifact_hash": "sha256:f3c8e6a5b2d1f9c4e7a1d5f8b3c6e2a9d4f7c1a5e8b2d6f9a3c7e1b4d8f5c"
+    },
+    {
+      "id": "division_stakeholder_representation",
+      "name": "Stakeholder Representation Division",
+      "description": "Ensures that municipal governance decisions incorporate input from affected constituencies. Validates that deliberative processes include diverse stakeholder voices.",
+      "path": "/divisions/stakeholder-representation-division.md",
+      "dependencies": [
+        "identity_kernel",
+        "ethics_kernel"
+      ],
+      "artifact_hash": "sha256:a4d9e7f2c1b5a8d3f6c9e2a7b4d1f5c8e3a6b9d2f7c1a4e8b3d6f9a2c5e1b"
+    },
+    {
+      "id": "division_remedial_justice",
+      "name": "Remedial Justice Division",
+      "description": "Manages corrective action, liability assessment, and remedy provision when municipal governance failures cause harm. Enforces accountability and restitution.",
+      "path": "/divisions/remedial-justice-division.md",
+      "dependencies": [
+        "ethics_kernel",
+        "telemetry_kernel"
+      ],
+      "artifact_hash": "sha256:b5e1f8a3d2c6b9f4a7e1d5c2f8a3b6e9d1c4f7a2b5e8c1d4f6a9b2c5e8f1a"
+    }
+  ],
+  "kernel_dependencies": {
+    "identity_kernel": "github.com/beast-system/identity-kernel@3.0.0",
+    "ethics_kernel": "github.com/beast-system/ethics-kernel@3.0.0",
+    "telemetry_kernel": "github.com/beast-system/telemetry-kernel@3.0.0"
+  },
+  "import_map": {
+    "identity_kernel": "github.com/beast-system/identity-kernel",
+    "ethics_kernel": "github.com/beast-system/ethics-kernel",
+    "telemetry_kernel": "github.com/beast-system/telemetry-kernel",
+    "@munisible/divisions": "github.com/Pat333-ux/munisible-task-force/divisions",
+    "@beast/governance": "github.com/beast-system/governance-engine"
+  },
+  "dao_anchoring": {
+    "anchored": true,
+    "wallet": "0xca6a0d-1462-47eb-853e-175215d7322e",
+    "federal_case_reference": "2:25-cv-00484-JPH-MJD"
+  },
+  "metadata": {
+    "created_at": "2026-08-07T00:00:00Z",
+    "last_updated": "2026-08-07T00:00:00Z",
+    "registry_checksum": "sha256:registry_full_hash",
+    "governance_engine_version": "3.0.0",
+    "compliance_level": "federal_court_ordered",
+    "status": "active"
+  }
+}
